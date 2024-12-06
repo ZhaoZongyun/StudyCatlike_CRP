@@ -1,18 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 /// <summary>
-/// ¹ÜÏß
+/// ç®¡çº¿
 /// </summary>
-public class CustomRenderPipeline : RenderPipeline
+public class CustomRenderPipeline : RenderPipeline 
 {
     CameraRenderer renderer = new CameraRenderer();
 
     protected override void Render(ScriptableRenderContext context, Camera[] cameras)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     protected override void Render(ScriptableRenderContext context, List<Camera> cameras)
@@ -21,6 +21,7 @@ public class CustomRenderPipeline : RenderPipeline
 
         for (int i = 0; i < cameras.Count; i++)
         {
+            Debug.Log(cameras[i].gameObject.name);
             renderer.Render(context, cameras[i]);
         }
     }
