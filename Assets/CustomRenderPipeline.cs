@@ -21,7 +21,7 @@ public class CustomRenderPipeline : RenderPipeline
 
         for (int i = 0; i < cameras.Count; i++)
         {
-            Debug.Log(cameras[i].gameObject.name);
+            //Debug.Log(cameras[i].gameObject.name);
             renderer.Render(context, cameras[i]);
         }
     }
