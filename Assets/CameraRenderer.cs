@@ -9,34 +9,27 @@ using UnityEngine.Rendering;
 /// 相机渲染器
 ///     大致相当于 URP 的可编程渲染器 
 /// </summary>
-public class CameraRenderer
+public partial class CameraRenderer
 {
     ScriptableRenderContext context;
     Camera camera;
-    const string bufferName = "MyBuffer";
+    string bufferName;
     CommandBuffer buffer;
     CullingResults cullingResults;
     static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
-    static ShaderTagId[] legacyShaderTagIds = {
-        new ShaderTagId("Always"),
-        new ShaderTagId("ForwardBase"),
-        new ShaderTagId("PrepassBase"),
-        new ShaderTagId("Vertex"),
-        new ShaderTagId("VertexLMRGBM"),
-        new ShaderTagId("VertexLM"),
-    };
 
     public void Render(ScriptableRenderContext context, Camera camera)
     {
         this.context = context;
         this.camera = camera;
 
-        // 绘制天空盒使用上面专门的方法，但其它命令需要使用 Command Buffer
-        buffer = new CommandBuffer
-        {
-            name = bufferName,
-        };
+        Debug.Log($"camera: {camera.name} type: {camera.cameraType}");
 
+        // 绘制天空盒使用上面专门的方法，但其它命令需要使用 Command Buffer
+        buffer = new CommandBuffer();
+        buffer.name = bufferName = camera.name;
+
+        PrepareForSceneWindow();
         if (!Cull())
         {
             return;
@@ -45,6 +38,7 @@ public class CameraRenderer
         Setup();
         DrawVisiableGeometry();
         DrawUnsupportShaders();
+        DrawGizmos();
         Submit();
     }
 
@@ -52,7 +46,12 @@ public class CameraRenderer
     {
         // 设置相机的VP矩阵，其包括相机的坐标和朝向（V矩阵）、透视或正交（P矩阵）
         context.SetupCameraProperties(camera);
-        buffer.ClearRenderTarget(true, true, Color.clear);
+        CameraClearFlags flags = camera.clearFlags;
+        buffer.ClearRenderTarget(
+            flags <= CameraClearFlags.Depth,
+            flags <= CameraClearFlags.Color,
+            flags == CameraClearFlags.Color ? camera.backgroundColor.linear : Color.clear
+        );
 
         buffer.BeginSample(bufferName);
         ExecuteBuffer();
@@ -80,18 +79,6 @@ public class CameraRenderer
         drawingSettings.sortingSettings = sortingSettings;
         filteringSettings.renderQueueRange = RenderQueueRange.transparent;
         context.DrawRenderers(cullingResults, ref drawingSettings, ref filteringSettings);
-    }
-
-    void DrawUnsupportShaders()
-    {
-        var drawSettings = new DrawingSettings(legacyShaderTagIds[0], new SortingSettings(camera));
-        for (int i = 1; i < legacyShaderTagIds.Length; i++)
-        {
-            drawSettings.SetShaderPassName(i, legacyShaderTagIds[i]);
-        }
-
-        var filteringSettings = FilteringSettings.defaultValue;
-        context.DrawRenderers(cullingResults, ref drawSettings, ref filteringSettings);
     }
 
     bool Cull()

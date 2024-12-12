@@ -11,6 +11,7 @@ public class CustomRenderPipelineAsset : RenderPipelineAsset
 {
     protected override RenderPipeline CreatePipeline()
     {
+        Debug.Log("调用 RenderPipelineAsset.CreatePipeline 方法");
         var crp = new CustomRenderPipeline();
         return crp;
     }

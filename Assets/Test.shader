@@ -14,6 +14,7 @@ Shader "zzy/ColorMultiply"
 
         Pass                                        // 通道
         {
+            Tags {"LightMode" = "MyTest"}
             CGPROGRAM                               // CG 程序块
             #pragma vertex vert                     // 顶点、片段函数定义
             #pragma fragment frag
