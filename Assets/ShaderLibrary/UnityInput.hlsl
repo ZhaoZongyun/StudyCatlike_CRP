@@ -1,8 +1,16 @@
-#ifndef CUSTOM_UNITY_INPUT_INCLUDE
+﻿#ifndef CUSTOM_UNITY_INPUT_INCLUDE
 #define CUSTOM_UNITY_INPUT_INCLUDE
 
+CBUFFER_START(UnityPerMaterial)
+float4 _BaseColor;
+CBUFFER_END
+
+CBUFFER_START(UnityPerDraw)
 float4x4 unity_ObjectToWorld;
 float4x4 unity_WorldToObject;
+float4 unity_LODFade;
+real4 unity_WorldTransformParams;
+CBUFFER_END
 
 float4x4 unity_prev_MatrixM;
 float4x4 unity_prev_MatrixIM;

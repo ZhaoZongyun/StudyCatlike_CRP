@@ -6,13 +6,18 @@ using UnityEngine.Rendering;
 /// <summary>
 /// 管线
 /// </summary>
-public class CustomRenderPipeline : RenderPipeline 
+public class CustomRenderPipeline : RenderPipeline
 {
+    public CustomRenderPipeline()
+    {
+        GraphicsSettings.useScriptableRenderPipelineBatching = true;
+    }
+
     CameraRenderer renderer = new CameraRenderer();
 
     protected override void Render(ScriptableRenderContext context, Camera[] cameras)
     {
-        
+
     }
 
     protected override void Render(ScriptableRenderContext context, List<Camera> cameras)

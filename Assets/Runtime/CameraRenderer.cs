@@ -23,7 +23,7 @@ public partial class CameraRenderer
         this.context = context;
         this.camera = camera;
 
-        Debug.Log($"camera: {camera.name} type: {camera.cameraType}");
+        //Debug.Log($"camera: {camera.name} type: {camera.cameraType}");
 
         // 绘制天空盒使用上面专门的方法，但其它命令需要使用 Command Buffer
         buffer = new CommandBuffer();
