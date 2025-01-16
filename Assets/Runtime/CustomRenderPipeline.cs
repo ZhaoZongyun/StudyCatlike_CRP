@@ -8,9 +8,13 @@ using UnityEngine.Rendering;
 /// </summary>
 public class CustomRenderPipeline : RenderPipeline
 {
-    public CustomRenderPipeline()
+    bool useDynamicBatching, useGPUInstancing;
+
+    public CustomRenderPipeline(bool useDynamicBatching, bool useGPUInstancing, bool useSRPBatcher)
     {
-        GraphicsSettings.useScriptableRenderPipelineBatching = true;
+        this.useDynamicBatching = useDynamicBatching;
+        this.useGPUInstancing = useGPUInstancing;
+        GraphicsSettings.useScriptableRenderPipelineBatching = useSRPBatcher;
     }
 
     CameraRenderer renderer = new CameraRenderer();
@@ -27,7 +31,7 @@ public class CustomRenderPipeline : RenderPipeline
         for (int i = 0; i < cameras.Count; i++)
         {
             //Debug.Log(cameras[i].gameObject.name);
-            renderer.Render(context, cameras[i]);
+            renderer.Render(context, cameras[i], useDynamicBatching, useGPUInstancing);
         }
     }
 }

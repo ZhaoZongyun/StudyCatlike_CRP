@@ -19,9 +19,7 @@ public class PerObjectMaterialProperties : MonoBehaviour
     private void OnValidate()
     {
         if (block == null)
-        {
             block = new MaterialPropertyBlock();
-        }
         block.SetColor(baseColorId, baseColor);
         GetComponent<Renderer>().SetPropertyBlock(block);
     }
