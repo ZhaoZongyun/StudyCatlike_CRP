@@ -11,12 +11,17 @@ Material:
   m_Shader: {fileID: 4800000, guid: 61bc88a75c270b04c9850eb65444a2ec, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - IsClip
+  m_InvalidKeywords:
+  - _CLIPPING
+  - _CLIPPING_ON
+  - _Clip
+  - _Clipping
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -24,19 +29,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 84977a1f715a7b743855cc2578105e0d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Clipping: 0
+    - _Clipping: 1
     - _Cull: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0.705
     - _DstBlend: 0
     - _ScrBlennd: 1
     - _SrcBlend: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 0.40094334, b: 0.40094334, a: 0.34901962}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

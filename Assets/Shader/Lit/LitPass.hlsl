@@ -1,7 +1,7 @@
-﻿#ifndef CUSTOM_LIT_PASS_INCLUDE
-#define CUSTOM_LIT_PASS_INCLUDE
+﻿#ifndef CUSTOM_UNLIT_PASS_INCLUDE
+#define CUSTOM_UNLIT_PASS_INCLUDE
 
- #include "../ShaderLibrary/Common.hlsl"
+#include "../../ShaderLibrary/Common.hlsl"
 
 struct Attributes {
     float3 positionOS:POSITION;
@@ -12,7 +12,7 @@ struct Varyings {
     float4 positionCS:SV_POSITION;
 };
 
-Varyings UnlitPassVertex(Attributes input) {
+Varyings LitPassVertex(Attributes input) {
     Varyings output;
      float3 positionWS = TransformObjectToWorld(input.positionOS);
      output.positionCS = TransformWorldToHClip(positionWS);
@@ -20,7 +20,7 @@ Varyings UnlitPassVertex(Attributes input) {
     return output;
 }
 
-float4 UnlitPassFragment(Varyings input):SV_TARGET {
+float4 LitPassFragment(Varyings input):SV_TARGET {
     return _BaseColor;
 }
 

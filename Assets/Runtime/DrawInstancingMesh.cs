@@ -8,10 +8,10 @@ public class DrawInstancingMesh : MonoBehaviour
     MaterialPropertyBlock block;
 
     [SerializeField]
-    Mesh mesh = default(Mesh);
+    Mesh mesh = default;
 
     [SerializeField]
-    Material material = default(Material);
+    Material material = default;
 
     Matrix4x4[] matrices = new Matrix4x4[1023];
     Vector4[] baseColors = new Vector4[1023];
