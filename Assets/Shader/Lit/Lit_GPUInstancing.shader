@@ -1,4 +1,4 @@
-﻿Shader "Custom RP/Lit"
+﻿Shader "Custom RP/Lit_GPUInstancing"
 {
 	Properties
 	{
@@ -13,10 +13,10 @@
 			Tags{"LightMode" = "CustomLit"}
 
 			HLSLPROGRAM
-
+			#pragma multi_compile_instancing
 			#pragma vertex LitPassVertex
 			#pragma fragment LitPassFragment
-			#include "LitPass.hlsl"
+			#include "LitPass_GPUInstancing.hlsl"
 
 			ENDHLSL
 		}	

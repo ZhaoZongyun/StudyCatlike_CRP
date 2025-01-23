@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -18,6 +17,8 @@ public partial class CameraRenderer
     CullingResults cullingResults;
     static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
     static ShaderTagId litShaderTagId = new ShaderTagId("CustomLit");
+
+    Lighting lighting = new Lighting();
 
     public void Render(ScriptableRenderContext context, Camera camera, bool useDynamicBatching, bool useGPUInstancing)
     {
@@ -37,6 +38,7 @@ public partial class CameraRenderer
         }
 
         Setup();
+        lighting.Setup(context);
         DrawVisiableGeometry(useDynamicBatching, useGPUInstancing);
         DrawUnsupportShaders();
         DrawGizmos();

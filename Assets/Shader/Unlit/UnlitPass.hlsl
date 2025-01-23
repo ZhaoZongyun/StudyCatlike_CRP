@@ -1,7 +1,7 @@
 ﻿#ifndef CUSTOM_LIT_PASS_INCLUDE
 #define CUSTOM_LIT_PASS_INCLUDE
 
- #include "../ShaderLibrary/Common.hlsl"
+ #include "../../ShaderLibrary/Common.hlsl"
 
 struct Attributes {
     float3 positionOS:POSITION;
